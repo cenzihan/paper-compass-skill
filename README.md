@@ -20,8 +20,7 @@ Paper Compass | 论文前置学习路径生成
 Claude 安装：
 
 ```bash
-claude plugin marketplace add cenzihan/paper-compass-skill
-claude plugin install paper-compass@paper-compass-skill
+claude plugin add cenzihan/paper-compass-skill
 ```
 
 Codex 安装（插件方式）：
