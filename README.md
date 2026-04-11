@@ -20,22 +20,22 @@ Paper Compass | 论文罗盘
 Claude 安装：
 
 ```bash
-claude plugin marketplace add cenzihan/paper-compass
+claude plugin marketplace add cenzihan/paper-compass-skill
 claude plugin install paper-compass@cenzihan-lab
 ```
 
 Codex 安装（插件方式）：
 
 ```bash
-codex plugin add cenzihan/paper-compass
+codex plugin add cenzihan/paper-compass-skill
 ```
 
 Codex 安装（Skill 目录方式）：
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/cenzihan/paper-compass.git
-cp -r paper-compass/skills/paper-compass ~/.codex/skills/paper-compass
+git clone https://github.com/cenzihan/paper-compass-skill.git
+cp -r paper-compass-skill/skills/paper-compass ~/.codex/skills/paper-compass
 ```
 
 ## 使用方式
@@ -63,9 +63,6 @@ cp -r paper-compass/skills/paper-compass ~/.codex/skills/paper-compass
 | 输入类型 | 示例 |
 |---|---|
 | arXiv ID | `2010.11929` |
-| arXiv abs URL | `https://arxiv.org/abs/2010.11929` |
-| arXiv pdf URL | `https://arxiv.org/pdf/2010.11929` |
-| arXiv html URL | `https://arxiv.org/html/2010.11929` |
 | 本地 PDF | `./papers/vit.pdf` |
 | 其他论文 URL | `https://...` |
 
@@ -126,6 +123,5 @@ paper-compass/
 ## License
 
 MIT
-
 
 

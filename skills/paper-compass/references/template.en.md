@@ -5,15 +5,20 @@
 - Title: {title}
 - Authors: {authors}
 - Year: {year}
+- Publication Status: {preprint_or_published}
+- Venue: {venue_name_or_na}
+- Venue Type: {journal_or_conference_or_workshop_or_preprint}
+- JCR Quartile: {Q1/Q2/Q3/Q4/N/A}
+- CCF Rank: {A/B/C/N/A}
 - Source: {paper_url_or_path}
 - Key Sections Parsed: {section_list}
 - Memory File: {memory_path_or_not_found}
 
 ## 1. Must-Learn Prerequisites (Ordered)
 
-| Order | Concept | Why Needed | Where Used In Paper | Evidence | Difficulty | Minimum Goal | Estimated Time | Memory Status | Action |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | {concept} | {reason} | {section} | `[Sec X] "quote"` | {⭐/⭐⭐/⭐⭐⭐/⭐⭐⭐⭐/⭐⭐⭐⭐⭐} | {goal} | {time} | {mastered/familiar/basic/unknown} | {learn/review/skip} |
+| Order | Concept | Why Needed | Where Used In Paper | Evidence | Difficulty | Minimum Goal | Estimated Time |
+|---|---|---|---|---|---|---|---|
+| 1 | {concept} | {reason} | {section} | `[Sec X] "quote"` | {⭐/⭐⭐/⭐⭐⭐/⭐⭐⭐⭐/⭐⭐⭐⭐⭐} | {goal} | {time} |
 
 ## 2. Bridge Concepts (Optional but Helpful)
 
@@ -52,12 +57,3 @@
 1. {concept}: {minimum actionable learning task}
 2. {concept}: {minimum actionable learning task}
 3. Re-open paper sections: {sections}
-
-## 7. Confidence and Gaps
-
-- Low-confidence concepts:
-  - {item + reason}
-- Missing evidence or parsing limits:
-  - {item}
-- Next best action:
-  - {action}

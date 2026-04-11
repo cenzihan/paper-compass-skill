@@ -70,10 +70,17 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 Extract and record:
 
 - Title, authors, year
+- Publication metadata:
+  - publication status (`preprint` or `published`)
+  - venue name
+  - venue type (`journal` / `conference` / `workshop` / `preprint`)
+  - JCR quartile (journal-only; otherwise `N/A`)
+  - CCF rank (if applicable; otherwise `N/A`)
 - Section titles and numbers (e.g., `3.2 Transformer Encoder`)
 - Key areas: method, experimental setup, critical appendix details
 
 For arXiv papers, prefer HTML to reduce PDF parsing errors.
+If metadata cannot be verified, explicitly use `N/A` or `insufficient information` instead of guessing.
 
 ### Step 2: Load User Prior Knowledge (`memory.md`)
 
@@ -154,6 +161,7 @@ When `lang=zh`:
   - bilibili lectures/tutorials
   - Zhihu columns/answers with technical depth
   - CSDN posts only when they are implementation-useful and not low-quality copy.
+- Anthropic official docs/blog articles can be included when they clarify core concepts.
 - Prefer high-signal Chinese resources over generic summaries.
 
 ### Step 8: Generate Report

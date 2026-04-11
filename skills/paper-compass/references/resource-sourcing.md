@@ -22,6 +22,7 @@ Prefer resources in this order:
 ## Link Quality Rules
 
 - Use stable URLs when possible (`arxiv.org`, official conference pages, official channel uploads).
+- Anthropic official docs/blog articles are allowed as high-quality explanatory references when relevant.
 - Avoid low-information aggregator pages.
 - Avoid paywalled-only links when a free alternative exists.
 

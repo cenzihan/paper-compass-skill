@@ -18,22 +18,22 @@ Build a prerequisite roadmap before you start reading a research paper.
 Install on Claude:
 
 ```bash
-claude plugin marketplace add cenzihan/paper-compass
+claude plugin marketplace add cenzihan/paper-compass-skill
 claude plugin install paper-compass@cenzihan-lab
 ```
 
 Install on Codex (plugin mode):
 
 ```bash
-codex plugin add cenzihan/paper-compass
+codex plugin add cenzihan/paper-compass-skill
 ```
 
 Install on Codex (skills folder mode):
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/cenzihan/paper-compass.git
-cp -r paper-compass/skills/paper-compass ~/.codex/skills/paper-compass
+git clone https://github.com/cenzihan/paper-compass-skill.git
+cp -r paper-compass-skill/skills/paper-compass ~/.codex/skills/paper-compass
 ```
 
 ## Usage
@@ -61,9 +61,6 @@ Language option:
 | Input Type | Example |
 |---|---|
 | arXiv ID | `2010.11929` |
-| arXiv abs URL | `https://arxiv.org/abs/2010.11929` |
-| arXiv pdf URL | `https://arxiv.org/pdf/2010.11929` |
-| arXiv html URL | `https://arxiv.org/html/2010.11929` |
 | Local PDF | `./papers/vit.pdf` |
 | Other paper URL | `https://...` |
 

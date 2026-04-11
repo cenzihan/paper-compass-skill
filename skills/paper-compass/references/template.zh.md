@@ -5,15 +5,20 @@
 - 标题: {title}
 - 作者: {authors}
 - 年份: {year}
+- 发表信息: {publication_status_preprint_or_published}
+- 发表 venue: {venue_name_or_na}
+- venue 类型: {journal_or_conference_or_workshop_or_preprint}
+- JCR 分区: {Q1/Q2/Q3/Q4/N/A}
+- CCF 等级: {A/B/C/N/A}
 - 来源: {paper_url_or_path}
 - 已解析章节: {section_list}
 - 记忆文件: {memory_path_or_not_found}
 
 ## 1. 必学先修知识（按顺序）
 
-| 顺序 | 知识点 | 为什么必学 | 论文使用位置 | 证据锚点 | 难度 | 最小学习目标 | 预计时间 | 记忆状态 | 动作 |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | {concept} | {reason} | {section} | `[Sec X] "quote"` | {⭐/⭐⭐/⭐⭐⭐/⭐⭐⭐⭐/⭐⭐⭐⭐⭐} | {goal} | {time} | {mastered/familiar/basic/unknown} | {learn/review/skip} |
+| 顺序 | 知识点 | 为什么必学 | 论文使用位置 | 证据锚点 | 难度 | 最小学习目标 | 预计时间 |
+|---|---|---|---|---|---|---|---|
+| 1 | {concept} | {reason} | {section} | `[Sec X] "quote"` | {⭐/⭐⭐/⭐⭐⭐/⭐⭐⭐⭐/⭐⭐⭐⭐⭐} | {goal} | {time} |
 
 ## 2. 桥接知识（可选但有帮助）
 
@@ -52,12 +57,3 @@
 1. {concept}: {minimum actionable learning task}
 2. {concept}: {minimum actionable learning task}
 3. 回看论文章节: {sections}
-
-## 7. 置信度与缺口
-
-- 低置信度条目:
-  - {item + reason}
-- 证据不足或解析限制:
-  - {item}
-- 下一步建议:
-  - {action}
