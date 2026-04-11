@@ -1,4 +1,4 @@
-# paper-compass
+﻿# paper-compass
 
 Paper Compass
 
@@ -18,7 +18,7 @@ Build a prerequisite roadmap before you start reading a research paper.
 Install on Claude:
 
 ```bash
-claude plugin add cenzihan/paper-compass
+claude plugin install cenzihan/paper-compass
 ```
 
 Install on Codex (plugin mode):
@@ -122,3 +122,4 @@ paper-compass/
 ## License
 
 MIT
+
