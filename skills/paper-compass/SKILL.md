@@ -52,6 +52,16 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 - Never fabricate sections, quotes, or resource links.
 - Use `low-confidence` when certainty is limited.
 
+### C4: Impact Verification
+
+- For the "影响力" (Impact) field in Paper Snapshot, must search online for actual citation counts and awards.
+- Use WebSearch or Semantic Scholar to find:
+  - Citation count from Semantic Scholar or Google Scholar
+  - Awards (e.g., best paper awards)
+  - Significant downstream applications
+- If the paper has won awards (e.g., NeurIPS Best Paper), must explicitly mention it.
+- Never claim "未发表" (unpublished) without verification — search first.
+
 ## Input Normalization
 
 | User Input | Rule |
@@ -71,16 +81,19 @@ Extract and record:
 
 - Title, authors, year
 - Publication metadata:
-  - publication status (`preprint` or `published`)
   - venue name
-  - venue type (`journal` / `conference` / `workshop` / `preprint`)
   - JCR quartile (journal-only; otherwise `N/A`)
   - CCF rank (if applicable; otherwise `N/A`)
+- Impact data (search online via Semantic Scholar or WebSearch):
+  - Citation count
+  - Awards (e.g., best paper awards at top conferences)
+  - Notable downstream influence
 - Section titles and numbers (e.g., `3.2 Transformer Encoder`)
 - Key areas: method, experimental setup, critical appendix details
 
 For arXiv papers, prefer HTML to reduce PDF parsing errors.
-If metadata cannot be verified, explicitly use `N/A` or `insufficient information` instead of guessing.
+Use Semantic Scholar API to find citation counts and publication venue.
+NEVER claim unpublished without online verification.
 
 ### Step 2: Load User Prior Knowledge (`memory.md`)
 

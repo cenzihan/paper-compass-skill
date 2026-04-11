@@ -5,14 +5,9 @@
 - Title: {title}
 - Authors: {authors}
 - Year: {year}
-- Publication Status: {preprint_or_published}
-- Venue: {venue_name_or_na}
-- Venue Type: {journal_or_conference_or_workshop_or_preprint}
-- JCR Quartile: {Q1/Q2/Q3/Q4/N/A}
-- CCF Rank: {A/B/C/N/A}
+- Publication & Venue: {venue_name} | JCR Quartile: {Q1/Q2/Q3/Q4/N/A} | CCF Rank: {A/B/C/N/A}
 - Source: {paper_url_or_path}
-- Key Sections Parsed: {section_list}
-- Memory File: {memory_path_or_not_found}
+- **Impact**: {citation_count_if_known_or_N/A}
 
 ## 1. Must-Learn Prerequisites (Ordered)
 
@@ -54,6 +49,8 @@
 
 ## 6. 30-Minute Fast Start
 
-1. {concept}: {minimum actionable learning task}
-2. {concept}: {minimum actionable learning task}
-3. Re-open paper sections: {sections}
+Key experimental conclusions: {key_experiment_conclusions_in_1-3_sentences}
+
+## 7. **Sources**:
+
+- {paper_url}
