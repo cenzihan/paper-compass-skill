@@ -17,8 +17,24 @@ Paper Compass | 论文罗盘
 
 ## 安装
 
+Claude 安装：
+
 ```bash
-claude plugin add <your-namespace>/paper-compass
+claude plugin add cenzihan/paper-compass
+```
+
+Codex 安装（插件方式）：
+
+```bash
+codex plugin add cenzihan/paper-compass
+```
+
+Codex 安装（Skill 目录方式）：
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/cenzihan/paper-compass.git
+cp -r paper-compass/skills/paper-compass ~/.codex/skills/paper-compass
 ```
 
 ## 使用方式

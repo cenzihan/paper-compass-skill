@@ -15,8 +15,24 @@ Build a prerequisite roadmap before you start reading a research paper.
 
 ## Install
 
+Install on Claude:
+
 ```bash
-claude plugin add <your-namespace>/paper-compass
+claude plugin add cenzihan/paper-compass
+```
+
+Install on Codex (plugin mode):
+
+```bash
+codex plugin add cenzihan/paper-compass
+```
+
+Install on Codex (skills folder mode):
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/cenzihan/paper-compass.git
+cp -r paper-compass/skills/paper-compass ~/.codex/skills/paper-compass
 ```
 
 ## Usage
