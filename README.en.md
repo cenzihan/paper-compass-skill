@@ -18,7 +18,8 @@ Build a prerequisite roadmap before you start reading a research paper.
 Install on Claude:
 
 ```bash
-claude plugin install cenzihan/paper-compass
+claude plugin marketplace add cenzihan/paper-compass
+claude plugin install paper-compass@paper-compass
 ```
 
 Install on Codex (plugin mode):

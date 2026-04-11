@@ -20,7 +20,8 @@ Paper Compass | 论文罗盘
 Claude 安装：
 
 ```bash
-claude plugin install cenzihan/paper-compass
+claude plugin marketplace add cenzihan/paper-compass
+claude plugin install paper-compass@paper-compass
 ```
 
 Codex 安装（插件方式）：
