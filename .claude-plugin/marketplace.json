@@ -1,0 +1,19 @@
+﻿{
+  "name": "paper-compass",
+  "description": "Paper Compass - prerequisite learning roadmap skill for research papers.",
+  "owner": {
+    "name": "paper-compass"
+  },
+  "metadata": {
+    "description": "Extracts what to learn before reading a paper, grounds each concept in paper sections and quotes, and personalizes with memory.md.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "paper-compass",
+      "source": "./",
+      "description": "Use /paper-compass <paper> [memory=...] to generate prerequisite learning paths."
+    }
+  ]
+}
+
