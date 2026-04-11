@@ -1,4 +1,4 @@
-﻿---
+---
 name: paper-compass
 description: "Paper Compass. Build prerequisite learning paths before reading a paper. Extract concepts, anchor evidence to sections, rank order and difficulty, recommend resources. Use when user gives arXiv ID/link/PDF and asks what to learn first."
 user_invocable: true
