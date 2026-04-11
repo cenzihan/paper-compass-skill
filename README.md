@@ -17,25 +17,13 @@ Paper Compass | 论文前置学习路径生成
 
 ## 安装
 
-Claude 安装：
-
 ```bash
-claude plugin add cenzihan/paper-compass-skill
-```
-
-Codex 安装（插件方式）：
-
-```bash
-codex plugin add cenzihan/paper-compass-skill
-```
-
-Codex 安装（Skill 目录方式）：
-
-```bash
-mkdir -p ~/.codex/skills
+mkdir -p ~/.claude/skills/paper-compass
 git clone https://github.com/cenzihan/paper-compass-skill.git
-cp -r paper-compass-skill/skills/paper-compass ~/.codex/skills/paper-compass
+cp -r paper-compass-skill/skills/paper-compass ~/.claude/skills/paper-compass
 ```
+
+安装后重启 Claude Code，即可用 `/paper-compass` 直接调用。
 
 ## 使用方式
 
@@ -105,16 +93,13 @@ paper-compass/
 ├── README.en.md
 ├── CLAUDE.md
 ├── LICENSE
-├── .claude-plugin/
-│   ├── plugin.json
-│   └── marketplace.json
-├── .codex-plugin/
-│   └── plugin.json
 └── skills/
     └── paper-compass/
         ├── SKILL.md
         └── references/
             ├── template.md
+            ├── template.zh.md
+            ├── template.en.md
             ├── memory-format.md
             └── resource-sourcing.md
 ```

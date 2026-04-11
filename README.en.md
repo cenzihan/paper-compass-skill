@@ -15,26 +15,13 @@ Build a prerequisite roadmap before you start reading a research paper.
 
 ## Install
 
-Install on Claude:
-
 ```bash
-claude plugin marketplace add cenzihan/paper-compass-skill
-claude plugin install paper-compass@paper-compass-skill
-```
-
-Install on Codex (plugin mode):
-
-```bash
-codex plugin add cenzihan/paper-compass-skill
-```
-
-Install on Codex (skills folder mode):
-
-```bash
-mkdir -p ~/.codex/skills
+mkdir -p ~/.claude/skills/paper-compass
 git clone https://github.com/cenzihan/paper-compass-skill.git
-cp -r paper-compass-skill/skills/paper-compass ~/.codex/skills/paper-compass
+cp -r paper-compass-skill/skills/paper-compass ~/.claude/skills/paper-compass
 ```
+
+After installation, restart Claude Code and use `/paper-compass` directly.
 
 ## Usage
 
@@ -101,18 +88,16 @@ When analyzing the QLoRA paper, it prioritizes deltas like `4-bit quantization /
 ```text
 paper-compass/
 ├── README.md
-├── README.zh-CN.md
 ├── README.en.md
 ├── CLAUDE.md
 ├── LICENSE
-├── .claude-plugin/
-│   ├── plugin.json
-│   └── marketplace.json
 └── skills/
     └── paper-compass/
         ├── SKILL.md
         └── references/
             ├── template.md
+            ├── template.zh.md
+            ├── template.en.md
             ├── memory-format.md
             └── resource-sourcing.md
 ```
