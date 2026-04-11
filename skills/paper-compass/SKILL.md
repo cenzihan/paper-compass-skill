@@ -1,6 +1,6 @@
 ﻿---
 name: paper-compass
-description: "Paper Compass. Build a prerequisite learning path before reading a research paper. Extract prerequisite concepts, anchor each concept to paper sections and short evidence quotes, rank learning order and difficulty, recommend paper/video resources, personalize by reading memory.md, and support output language selection via lang=zh|en (default zh). Use when user gives an arxiv ID/link/PDF/local paper and asks what to learn first."
+description: "Paper Compass. Build prerequisite learning paths before reading a paper. Extract concepts, anchor evidence to sections, rank order and difficulty, recommend resources. Use when user gives arXiv ID/link/PDF and asks what to learn first."
 user_invocable: true
 ---
 
