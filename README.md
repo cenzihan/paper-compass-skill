@@ -12,7 +12,7 @@ Paper Compass | 论文罗盘
 - 证据驱动：每个知识点都要标注“论文哪一章会用到 + 原文短证据”。
 - 学习路径：给出先后顺序、依赖关系、学习难度、预估投入。
 - 个性化裁剪：读取 `memory.md`，跳过你已经掌握的内容。
-- 资源推荐：每个知识点推荐论文链接和视频链接。
+- 资源推荐：每个知识点推荐论文链接和视频链接，并支持国内社区（如知乎、CSDN、Bilibill）与国外社区（如 arxiv、Reddit、Hacker News、authorpic）的讨论资源。
 - 报告输出：生成结构化学习清单（Markdown）。
 
 ## 安装
@@ -21,7 +21,7 @@ Claude 安装：
 
 ```bash
 claude plugin marketplace add cenzihan/paper-compass-skill
-claude plugin install paper-compass@cenzihan-lab
+claude plugin install paper-compass@paper-compass-skill
 ```
 
 Codex 安装（插件方式）：

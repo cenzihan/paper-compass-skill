@@ -19,7 +19,7 @@ Install on Claude:
 
 ```bash
 claude plugin marketplace add cenzihan/paper-compass-skill
-claude plugin install paper-compass@cenzihan-lab
+claude plugin install paper-compass@paper-compass-skill
 ```
 
 Install on Codex (plugin mode):
