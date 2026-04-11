@@ -19,7 +19,7 @@ Install on Claude:
 
 ```bash
 claude plugin marketplace add cenzihan/paper-compass
-claude plugin install paper-compass@paper-compass
+claude plugin install paper-compass@cenzihan-lab
 ```
 
 Install on Codex (plugin mode):
@@ -123,4 +123,5 @@ paper-compass/
 ## License
 
 MIT
+
 

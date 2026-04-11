@@ -21,7 +21,7 @@ Claude 安装：
 
 ```bash
 claude plugin marketplace add cenzihan/paper-compass
-claude plugin install paper-compass@paper-compass
+claude plugin install paper-compass@cenzihan-lab
 ```
 
 Codex 安装（插件方式）：
@@ -126,5 +126,6 @@ paper-compass/
 ## License
 
 MIT
+
 
 

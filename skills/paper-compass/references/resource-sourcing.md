@@ -5,6 +5,11 @@ For each `must` concept, provide:
 - 1-2 paper/survey resources
 - 1-2 video resources
 
+Language-specific requirement:
+
+- If `lang=zh`, keep original paper links and add Chinese community resources when high quality (bilibili, Zhihu, CSDN).
+- If `lang=en`, prioritize English-first academic resources.
+
 ## Ranking Rules
 
 Prefer resources in this order:
@@ -25,6 +30,7 @@ Prefer resources in this order:
 - Each resource must map to one concrete concept.
 - Add one-line rationale: why this resource is useful for this concept.
 - If only one good source exists, provide one and mark `limited-source`.
+- For `lang=zh`, ensure each core concept still has at least one original paper/survey link (do not replace papers with only community posts).
 
 ## Honesty Rules
 

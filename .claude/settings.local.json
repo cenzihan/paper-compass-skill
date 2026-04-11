@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:arxiv.org)",
+      "WebSearch",
+      "WebFetch(domain:jalammar.github.io)",
+      "WebFetch(domain:www.youtube.com)"
+    ]
+  }
+}

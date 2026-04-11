@@ -1,5 +1,5 @@
 {
-  "name": "paper-compass",
+  "name": "cenzihan-lab",
   "description": "Paper Compass - prerequisite learning roadmap skill for research papers.",
   "owner": {
     "name": "paper-compass"
@@ -12,7 +12,7 @@
     {
       "name": "paper-compass",
       "source": "./",
-      "description": "Use /paper-compass <paper> [memory=...] to generate prerequisite learning paths."
+      "description": "Use /paper-compass <paper> [memory=...] [lang=zh|en] to generate prerequisite learning paths."
     }
   ]
 }

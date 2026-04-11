@@ -14,6 +14,7 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 - Default output language: `zh`
 - If `lang` is not provided, output in Chinese.
 - If `lang=en`, output all report sections and notes in English.
+- If `lang=zh`, all report section titles must be Chinese.
 - Keep technical terms unchanged when translation could reduce precision.
 
 ## Constraints
@@ -30,7 +31,13 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 
 - Include only concepts required to understand the paper.
 - Order by dependency: foundation -> bridge -> paper-specific.
-- For each concept, provide difficulty (1-5) and a minimum learning goal.
+- For each concept, provide star difficulty and a minimum learning goal.
+- Star difficulty format:
+  - 1 -> `⭐`
+  - 2 -> `⭐⭐`
+  - 3 -> `⭐⭐⭐`
+  - 4 -> `⭐⭐⭐⭐`
+  - 5 -> `⭐⭐⭐⭐⭐`
 
 ### C2: Personalization First
 
@@ -140,14 +147,29 @@ For each `must` concept recommend:
 
 Follow `references/resource-sourcing.md`.
 
+When `lang=zh`:
+
+- Keep original paper links as mandatory references.
+- Add more Chinese-learning links when relevant:
+  - bilibili lectures/tutorials
+  - Zhihu columns/answers with technical depth
+  - CSDN posts only when they are implementation-useful and not low-quality copy.
+- Prefer high-signal Chinese resources over generic summaries.
+
 ### Step 8: Generate Report
 
-Read `references/template.md` and write:
+Select template by language:
+
+- `lang=zh` -> `references/template.zh.md`
+- `lang=en` -> `references/template.en.md`
+- fallback -> `references/template.md`
+
+Read selected template and write:
 
 - File name: `{timestamp}--paper-compass-{short-title}__learnpath.md`
-- Path: `~/Documents/notes/`
+- Path: current working directory (`./`)
 
-After writing, report the output path to the user.
+After writing, report the absolute output path to the user.
 
 ## Output Quality Checklist
 
