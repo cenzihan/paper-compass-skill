@@ -2,7 +2,7 @@
 
 # paper-compass
 
-Paper Compass | 论文罗盘
+Paper Compass | 论文前置学习路径生成
 
 在读论文之前，先给你一张“先学什么”的路线图。
 
