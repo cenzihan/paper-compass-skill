@@ -89,34 +89,61 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 
 | User Input | Rule |
 |---|---|
-| `2010.11929` or `arxiv:2010.11929` | Convert to `https://arxiv.org/html/2010.11929` |
-| `https://arxiv.org/abs/...` | Convert to `/html/` |
-| `https://arxiv.org/pdf/...` | Try `/html/` first, fallback to PDF |
-| `https://arxiv.org/html/...` | Use directly |
-| Local PDF path | Parse directly |
+| `2010.11929` or `arxiv:2010.11929` | Convert to arXiv ID, use multi-source fallback |
+| `https://arxiv.org/abs/...` | Extract ID, use multi-source fallback |
+| `https://arxiv.org/pdf/...` | Extract ID, use multi-source fallback |
+| `https://arxiv.org/html/...` | Extract ID, use multi-source fallback |
+| Local PDF path | Parse directly with Read tool |
 | Other paper URL | Fetch and parse if readable |
+
+### arXiv Paper Access Strategy (Multi-Source Fallback)
+
+When accessing arXiv papers, use this priority order. If one fails, try the next:
+
+1. **WebSearch first**: Search `arxiv {id}` to get title, authors, abstract, venue info
+2. **WebFetch HTML**: Try `https://arxiv.org/html/{id}` (easier to parse than PDF)
+3. **WebFetch PDF**: Try `https://arxiv.org/pdf/{id}` (parse full content)
+4. **Semantic Scholar**: Search by title to get venue, citations, publication status
+5. **If all fail**: Mark as `信息不足`, continue with WebSearch results only
+
+**CRITICAL**: 
+- If WebFetch fails with "domain verification" error, IMMEDIATELY fallback to WebSearch + PDF
+- NEVER give up after one failed attempt
+- WebSearch alone can provide enough metadata (title, authors, abstract) for a basic report
 
 ## Workflow
 
 ### Step 1: Read Paper and Build Section Map
 
+**Multi-Source Paper Access** (follow this order, fallback if one fails):
+
+```
+Priority 1: WebSearch `arxiv {id}` → get title, authors, abstract, year
+Priority 2: WebFetch HTML `https://arxiv.org/html/{id}` → full sections
+Priority 3: WebFetch PDF `https://arxiv.org/pdf/{id}` → full content
+Priority 4: Semantic Scholar API → venue, citations, publication status
+Priority 5: If all fail → continue with WebSearch metadata only
+```
+
 Extract and record:
 
-- Title, authors, year
+- Title, authors, year (from WebSearch if WebFetch fails)
 - Publication metadata:
-  - venue name
+  - venue name (search: `{title} + {year} + conference/journal`)
   - JCR quartile (journal-only; otherwise `N/A`)
   - CCF rank (if applicable; otherwise `N/A`)
-- Impact data (search online via Semantic Scholar or WebSearch):
-  - Citation count
-  - Awards (e.g., best paper awards at top conferences)
-  - Notable downstream influence
-- Section titles and numbers (e.g., `3.2 Transformer Encoder`)
+- Impact data (search online):
+  - Citation count (Semantic Scholar)
+  - Awards (e.g., best paper awards)
+  - Notable downstream applications
+- Section titles and numbers (if full content accessible)
 - Key areas: method, experimental setup, critical appendix details
 
-For arXiv papers, prefer HTML to reduce PDF parsing errors.
-Use Semantic Scholar API to find citation counts and publication venue.
-NEVER claim unpublished without online verification.
+**When WebFetch fails**:
+- Use WebSearch results for metadata (title, authors, abstract)
+- Search for `{title} venue` and `{title} citations` separately
+- Mark section-level evidence as `信息不足` if full paper not accessible
+- Still produce a valid report with available information
 
 ### Step 2: Load User Prior Knowledge (`memory.md`)
 
