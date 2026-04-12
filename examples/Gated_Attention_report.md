@@ -5,9 +5,9 @@
 - 标题: Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free
 - 作者: Zihan Qiu, Zekun Wang, Bo Zheng, Zeyu Huang, Kaiyue Wen, Songlin Yang, Rui Men, Le Yu, Fei Huang, Suozhi Huang, Dayiheng Liu, Jingren Zhou, Junyang Lin (Qwen Team, Alibaba Group; University of Edinburgh; Stanford University; MIT; Tsinghua University)
 - 年份: 2025
-- 发表信息与venue: arXiv preprint (cs.CL) | JCR 分区: N/A | CCF 等级: N/A
+- 发表信息与venue: NeurIPS 2025 (Best Paper Award) | JCR 分区: N/A (会议论文) | CCF 等级: A
 - 来源: https://arxiv.org/abs/2505.06708
-- **影响力**: 新发表预印本 (2025年5月), 引用数待统计, Qwen团队最新研究成果
+- **影响力**: NeurIPS 2025 最佳论文奖, 开创门控注意力机制新范式, 消除attention sink问题, 显著提升长上下文性能
 
 ## 1. 必学先修知识（按顺序）
 

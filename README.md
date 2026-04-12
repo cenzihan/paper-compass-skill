@@ -13,7 +13,7 @@ Paper Compass | 论文前置学习路径生成
 | 论文 | arXiv ID | Venue | 影响力 | 报告链接 |
 |---|---|---|---|---|
 | Vision Transformer (ViT) | 2010.11929 | ICLR 2021 | 70,000+ 引用 | [ViT_report.md](./examples/ViT_report.md) |
-| Gated Attention | 2505.06708 | arXiv preprint | Qwen团队最新研究 | [Gated_Attention_report.md](./examples/Gated_Attention_report.md) |
+| Gated Attention | 2505.06708 | NeurIPS 2025 (Best Paper) | 最佳论文奖 | [Gated_Attention_report.md](./examples/Gated_Attention_report.md) |
 | QLoRA | 2305.14314 | NeurIPS 2023 | 10,000+ 引用 | [QLoRA_report.md](./examples/QLoRA_report.md) |
 
 ## 功能亮点
