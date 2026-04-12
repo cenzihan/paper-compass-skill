@@ -12,6 +12,7 @@ Paper Compass | 论文前置学习路径生成
 
 | 论文 | arXiv ID | Venue | 影响力 | 报告链接 |
 |---|---|---|---|---|
+| ReAct | 2210.03629 | ICLR 2023 | LLM Agent奠基性工作 | [ReAct_agent_report.md](./examples/ReAct_agent_report.md) |
 | Vision Transformer (ViT) | 2010.11929 | ICLR 2021 | 70,000+ 引用 | [ViT_report.md](./examples/ViT_report.md) |
 | Gated Attention | 2505.06708 | NeurIPS 2025 (Best Paper) | 最佳论文奖 | [Gated_Attention_report.md](./examples/Gated_Attention_report.md) |
 | QLoRA | 2305.14314 | NeurIPS 2023 | 10,000+ 引用 | [QLoRA_report.md](./examples/QLoRA_report.md) |
@@ -94,6 +95,7 @@ paper-compass/
 ├── CLAUDE.md
 ├── LICENSE
 ├── examples/
+│   ├── ReAct_agent_report.md
 │   ├── ViT_report.md
 │   ├── Gated_Attention_report.md
 │   └── QLoRA_report.md
