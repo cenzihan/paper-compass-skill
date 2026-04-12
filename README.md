@@ -9,7 +9,7 @@ Paper Compass | 论文前置学习路径生成
 ## 功能亮点
 
 - 解析论文输入：支持 arXiv ID、arXiv URL、普通 URL、本地 PDF。
-- 证据驱动：每个知识点都要标注“论文哪一章会用到 + 原文短证据”。
+- 证据驱动：每个知识点都要标注“论文哪一章会用到 + 原文短证据”，避免幻觉
 - 学习路径：给出先后顺序、依赖关系、学习难度、预估投入。
 - 个性化裁剪：读取 `memory.md`，跳过你已经掌握的内容。
 - 资源推荐：每个知识点推荐论文链接和视频链接，并支持国内社区（如知乎、CSDN、Bilibill）与国外社区（如 arxiv、Reddit、Hacker News、authorpic）的讨论资源。
@@ -62,15 +62,15 @@ cp -r paper-compass-skill/skills/paper-compass ~/.claude/skills/paper-compass
 5. 资源清单（论文 + 视频）
 6. 基于 `memory.md` 的个性化建议
 
-## ViT 示例（节选）
+## 示例报告
 
-| 顺序 | 先修知识 | 论文使用位置 | 证据锚点（示例） | 难度 |
+以下为使用 `/paper-compass` 生成的完整报告示例：
+
+| 论文 | arXiv ID | Venue | 影响力 | 报告链接 |
 |---|---|---|---|---|
-| 1 | Patch Embedding | Sec 3.1 Vision Transformer | `"...split an image into fixed-size patches..."` | 2 |
-| 2 | Position Embedding | Sec 3.1 / 3.2 | `"...add position embeddings to patch embeddings..."` | 2 |
-| 3 | Transformer Encoder | Sec 3.2 | `"...standard Transformer encoder..."` | 3 |
-| 4 | MSA + MLP Block | Sec 3.2 | `"...alternating layers of MSA and MLP..."` | 3 |
-| 5 | Large-scale Pretraining | Sec 4 | `"...pre-train on large datasets..."` | 3 |
+| Vision Transformer (ViT) | 2010.11929 | ICLR 2021 | 70,000+ 引用 | [ViT_report.md](./examples/ViT_report.md) |
+| Gated Attention | 2505.06708 | arXiv preprint | Qwen团队最新研究 | [Gated_Attention_report.md](./examples/Gated_Attention_report.md) |
+| QLoRA | 2305.14314 | NeurIPS 2023 | 10,000+ 引用 | [QLoRA_report.md](./examples/QLoRA_report.md) |
 
 ## `memory.md` 个性化
 
@@ -93,6 +93,10 @@ paper-compass/
 ├── README.en.md
 ├── CLAUDE.md
 ├── LICENSE
+├── examples/
+│   ├── ViT_report.md
+│   ├── Gated_Attention_report.md
+│   └── QLoRA_report.md
 └── skills/
     └── paper-compass/
         ├── SKILL.md

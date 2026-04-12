@@ -7,7 +7,7 @@
 - 年份: {year}
 - 发表信息与venue: {venue_name} | JCR 分区: {Q1/Q2/Q3/Q4/N/A} | CCF 等级: {A/B/C/N/A}
 - 来源: {paper_url_or_path}
-- **影响力**: {citation_count_if_known_or_N/A}
+- **影响力**: {citation_count_and_awards_if_known_or_search_online_first}
 
 ## 1. 必学先修知识（按顺序）
 

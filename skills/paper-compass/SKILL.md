@@ -62,6 +62,22 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 - If the paper has won awards (e.g., NeurIPS Best Paper), must explicitly mention it.
 - Never claim "未发表" (unpublished) without verification — search first.
 
+### C5: Output Structure Compliance
+
+- Section 0 (论文快照) must follow this exact structure:
+  ```
+  - 标题: {title}
+  - 作者: {authors}
+  - 年份: {year}
+  - 发表信息与venue: {venue_name} | JCR 分区: {Q1/Q2/Q3/Q4/N/A} | CCF 等级: {A/B/C/N/A}
+  - 来源: {paper_url_or_path}
+  - **影响力**: {citation_count_and_awards_if_known_or_search_online}
+  ```
+- Section 6 (30 分钟快速起步) must only contain:
+  - `关键实验结论: {1-3 sentences summarizing key findings}`
+  - No numbered steps, no formulas, no extra content
+- Section 7 must be `## 7. **Sources**:` followed by reference links
+
 ## Input Normalization
 
 | User Input | Rule |
