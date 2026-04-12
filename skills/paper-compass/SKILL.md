@@ -52,15 +52,22 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 - Never fabricate sections, quotes, or resource links.
 - Use `low-confidence` when certainty is limited.
 
-### C4: Impact Verification
+### C4: Impact and Venue Verification
 
-- For the "影响力" (Impact) field in Paper Snapshot, must search online for actual citation counts and awards.
-- Use WebSearch or Semantic Scholar to find:
+- **For ALL papers**: Must search online for venue and impact information.
+- **NEVER claim "preprint" or "unpublished" without exhaustive verification**.
+- **For recent arXiv papers (within past 2 years)**: These are HIGH PRIORITY for venue verification:
+  - Many arXiv papers get published at conferences (NeurIPS, ICLR, ICML, ACL, etc.) within months
+  - Conference cycles: NeurIPS (Dec), ICLR (May), ICML (Jul), ACL (May-Aug)
+  - A paper submitted to arXiv in May 2025 could be published at NeurIPS 2025 (Dec 2025)
+  - MUST search: `{paper_title} + {year} + venue/conference/award`
+  - MUST check: Semantic Scholar publication status, OpenReview, conference award pages
+- **Impact data**: Search for:
   - Citation count from Semantic Scholar or Google Scholar
-  - Awards (e.g., best paper awards)
+  - Awards (e.g., "NeurIPS 2025 Best Paper", "ICLR 2024 Outstanding Paper")
   - Significant downstream applications
-- If the paper has won awards (e.g., NeurIPS Best Paper), must explicitly mention it.
-- Never claim "未发表" (unpublished) without verification — search first.
+- **If search tools fail**: Mark as `信息不足` or `venue待验证`, NOT "preprint/unpublished"
+- **If paper has won awards**: MUST explicitly mention in "影响力" field with award name and year
 
 ### C5: Output Structure Compliance
 
