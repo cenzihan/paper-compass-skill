@@ -100,16 +100,18 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 
 When accessing arXiv papers, use this priority order. If one fails, try the next:
 
-1. **WebSearch first**: Search `arxiv {id}` to get title, authors, abstract, venue info
-2. **WebFetch HTML**: Try `https://arxiv.org/html/{id}` (easier to parse than PDF)
-3. **WebFetch PDF**: Try `https://arxiv.org/pdf/{id}` (parse full content)
-4. **Semantic Scholar**: Search by title to get venue, citations, publication status
-5. **If all fail**: Mark as `信息不足`, continue with WebSearch results only
+1. **Skill: arxiv**: Use `/arxiv` skill to search `{id}` → get title, authors, abstract, year, download paper
+2. **Skill: semantic-scholar**: Use `/semantic-scholar` skill to search by title → get venue, citations, publication status, awards
+3. **WebFetch HTML**: Try `https://arxiv.org/html/{id}` (easier to parse than PDF)
+4. **WebFetch PDF**: Try `https://arxiv.org/pdf/{id}` (parse full content)
+5. **If all fail**: Mark as `信息不足`, continue with skill results only
 
 **CRITICAL**: 
-- If WebFetch fails with "domain verification" error, IMMEDIATELY fallback to WebSearch + PDF
+- **NEVER use WebSearch** - it only works in US and will fail in other regions (returns 0 results)
+- Use Skill tool to invoke `/arxiv` and `/semantic-scholar` instead - they use APIs directly, no region restriction
+- If WebFetch fails with "domain verification" error, IMMEDIATELY fallback to skill-based approach
 - NEVER give up after one failed attempt
-- WebSearch alone can provide enough metadata (title, authors, abstract) for a basic report
+- `/arxiv` + `/semantic-scholar` skills can provide enough metadata (title, authors, abstract, venue, citations) for a complete report
 
 ## Workflow
 
@@ -118,30 +120,29 @@ When accessing arXiv papers, use this priority order. If one fails, try the next
 **Multi-Source Paper Access** (follow this order, fallback if one fails):
 
 ```
-Priority 1: WebSearch `arxiv {id}` → get title, authors, abstract, year
-Priority 2: WebFetch HTML `https://arxiv.org/html/{id}` → full sections
-Priority 3: WebFetch PDF `https://arxiv.org/pdf/{id}` → full content
-Priority 4: Semantic Scholar API → venue, citations, publication status
-Priority 5: If all fail → continue with WebSearch metadata only
+Priority 1: Skill /arxiv {id} → title, authors, abstract, year, download paper
+Priority 2: Skill /semantic-scholar {title} → venue, citations, publication status, awards
+Priority 3: WebFetch HTML https://arxiv.org/html/{id} → full sections
+Priority 4: WebFetch PDF https://arxiv.org/pdf/{id} → full content
+Priority 5: If all fail → continue with skill metadata only, mark sections as 信息不足
 ```
 
 Extract and record:
 
-- Title, authors, year (from WebSearch if WebFetch fails)
+- Title, authors, year (from /arxiv skill)
 - Publication metadata:
-  - venue name (search: `{title} + {year} + conference/journal`)
+  - venue name (from /semantic-scholar skill)
   - JCR quartile (journal-only; otherwise `N/A`)
   - CCF rank (if applicable; otherwise `N/A`)
-- Impact data (search online):
-  - Citation count (Semantic Scholar)
-  - Awards (e.g., best paper awards)
+- Impact data (from /semantic-scholar skill):
+  - Citation count
+  - Awards (e.g., best paper awards - check if paper won awards)
   - Notable downstream applications
-- Section titles and numbers (if full content accessible)
+- Section titles and numbers (if full content accessible via WebFetch)
 - Key areas: method, experimental setup, critical appendix details
 
 **When WebFetch fails**:
-- Use WebSearch results for metadata (title, authors, abstract)
-- Search for `{title} venue` and `{title} citations` separately
+- Use /arxiv and /semantic-scholar skill results for metadata (title, authors, abstract, venue, citations)
 - Mark section-level evidence as `信息不足` if full paper not accessible
 - Still produce a valid report with available information
 
