@@ -54,20 +54,16 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 
 ### C4: Impact and Venue Verification
 
-- **For ALL papers**: Must search online for venue and impact information.
-- **NEVER claim "preprint" or "unpublished" without exhaustive verification**.
+- **For ALL papers**: Must fetch venue and impact information via API.
+- **NEVER claim "preprint" or "unpublished" without verification**.
 - **For recent arXiv papers (within past 2 years)**: These are HIGH PRIORITY for venue verification:
   - Many arXiv papers get published at conferences (NeurIPS, ICLR, ICML, ACL, etc.) within months
   - Conference cycles: NeurIPS (Dec), ICLR (May), ICML (Jul), ACL (May-Aug)
-  - A paper submitted to arXiv in May 2025 could be published at NeurIPS 2025 (Dec 2025)
-  - MUST search: `{paper_title} + {year} + venue/conference/award`
-  - MUST check: Semantic Scholar publication status, OpenReview, conference award pages
-- **Impact data**: Search for:
-  - Citation count from Semantic Scholar or Google Scholar
-  - Awards (e.g., "NeurIPS 2025 Best Paper", "ICLR 2024 Outstanding Paper")
-  - Significant downstream applications
-- **If search tools fail**: Mark as `信息不足` or `venue待验证`, NOT "preprint/unpublished"
-- **If paper has won awards**: MUST explicitly mention in "影响力" field with award name and year
+- **Impact data**: Fetch via Semantic Scholar API (Bash + curl):
+  - Citation count
+  - Venue name
+  - TLDR (one-line summary)
+- **If API fails**: Mark as `venue待验证` or `citations待验证`, NOT "preprint/unpublished"
 
 ### C5: Output Structure Compliance
 
@@ -98,52 +94,70 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 
 ### arXiv Paper Access Strategy (Multi-Source Fallback)
 
-When accessing arXiv papers, use this priority order. If one fails, try the next:
+**arXiv resources (PDF, HTML, abs) are PRIMARY - always use first:**
 
-1. **Skill: arxiv**: Use `/arxiv` skill to search `{id}` → get title, authors, abstract, year, download paper
-2. **Skill: semantic-scholar**: Use `/semantic-scholar` skill to search by title → get venue, citations, publication status, awards
-3. **WebFetch HTML**: Try `https://arxiv.org/html/{id}` (easier to parse than PDF)
-4. **WebFetch PDF**: Try `https://arxiv.org/pdf/{id}` (parse full content)
-5. **If all fail**: Mark as `信息不足`, continue with skill results only
+1. **arXiv API (abs)**: Fetch `http://export.arxiv.org/api/query?id_list={id}` → get title, authors, abstract, year
+2. **Download PDF**: `curl -L -o papers/{id}.pdf https://arxiv.org/pdf/{id}.pdf` → then use Read tool to parse full content
+3. **Semantic Scholar API (supplement)**: `curl -s "https://api.semanticscholar.org/graph/v1/paper/ARXIV:{id}?fields=venue,citationCount,tldr"` → get venue, citations
+
+**Priority Order:**
+```
+Priority 1: arXiv API → metadata (title, authors, abstract, year)
+Priority 2: Download PDF + Read tool → full paper content (sections, quotes, methods)
+Priority 3: Semantic Scholar API via curl → venue, citations, TLDR (supplement)
+```
 
 **CRITICAL**: 
-- **NEVER use WebSearch** - it only works in US and will fail in other regions (returns 0 results)
-- Use Skill tool to invoke `/arxiv` and `/semantic-scholar` instead - they use APIs directly, no region restriction
-- If WebFetch fails with "domain verification" error, IMMEDIATELY fallback to skill-based approach
-- NEVER give up after one failed attempt
-- `/arxiv` + `/semantic-scholar` skills can provide enough metadata (title, authors, abstract, venue, citations) for a complete report
+- **NEVER use WebSearch** - it only works in US and will fail in other regions
+- **NEVER use /semantic-scholar skill** - use Bash + curl directly (skill has rate limit issues)
+- **NEVER use WebFetch for arxiv.org** - domain verification will block it; use curl/download instead
+- arXiv PDF is the BEST source for full paper content - always download and read it
 
 ## Workflow
 
-### Step 1: Read Paper and Build Section Map
+### Step 1: Fetch Paper Metadata and Content
 
-**Multi-Source Paper Access** (follow this order, fallback if one fails):
+**Use Bash + Python/curl for all API calls** (no WebSearch, no WebFetch, no skill invocation):
 
+```bash
+# 1. Get arXiv metadata
+python3 -c "
+import urllib.request, xml.etree.ElementTree as ET, json
+NS = 'http://www.w3.org/2005/Atom'
+url = 'http://export.arxiv.org/api/query?id_list=ARXIV_ID'
+with urllib.request.urlopen(url, timeout=30) as r:
+    root = ET.fromstring(r.read())
+# Extract title, authors, abstract, year, pdf_url...
+"
+
+# 2. Download PDF
+mkdir -p papers && curl -L -o papers/ARXIV_ID.pdf https://arxiv.org/pdf/ARXIV_ID.pdf
+
+# 3. Get Semantic Scholar metadata (venue, citations)
+curl -s "https://api.semanticscholar.org/graph/v1/paper/ARXIV:ARXIV_ID?fields=venue,citationCount,publicationVenue,tldr"
 ```
-Priority 1: Skill /arxiv {id} → title, authors, abstract, year, download paper
-Priority 2: Skill /semantic-scholar {title} → venue, citations, publication status, awards
-Priority 3: WebFetch HTML https://arxiv.org/html/{id} → full sections
-Priority 4: WebFetch PDF https://arxiv.org/pdf/{id} → full content
-Priority 5: If all fail → continue with skill metadata only, mark sections as 信息不足
+
+**Then read PDF content**:
+```bash
+# Use Read tool on papers/ARXIV_ID.pdf to extract sections and quotes
 ```
 
 Extract and record:
 
-- Title, authors, year (from /arxiv skill)
+- Title, authors, year (from arXiv API)
 - Publication metadata:
-  - venue name (from /semantic-scholar skill)
+  - venue name (from Semantic Scholar API via curl)
   - JCR quartile (journal-only; otherwise `N/A`)
   - CCF rank (if applicable; otherwise `N/A`)
-- Impact data (from /semantic-scholar skill):
+- Impact data (from Semantic Scholar API via curl):
   - Citation count
-  - Awards (e.g., best paper awards - check if paper won awards)
-  - Notable downstream applications
-- Section titles and numbers (if full content accessible via WebFetch)
+  - TLDR (one-line summary)
+- Section titles and quotes (from PDF via Read tool)
 - Key areas: method, experimental setup, critical appendix details
 
-**When WebFetch fails**:
-- Use /arxiv and /semantic-scholar skill results for metadata (title, authors, abstract, venue, citations)
-- Mark section-level evidence as `信息不足` if full paper not accessible
+**When APIs fail**:
+- Mark section-level evidence as `信息不足` if PDF not accessible
+- Mark venue/citations as `待验证` if Semantic Scholar API fails
 - Still produce a valid report with available information
 
 ### Step 2: Load User Prior Knowledge (`memory.md`)
