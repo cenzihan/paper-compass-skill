@@ -1,6 +1,6 @@
 ﻿# Memory Format Guide
 
-`paper-compass` accepts flexible `memory.md` formats.
+`paper-compass-learnpath` accepts flexible `memory.md` formats.
 
 ## Preferred Format
 

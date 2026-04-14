@@ -2,89 +2,77 @@
 
 # paper-compass
 
-Paper Compass | 论文前置学习路径生成
+Paper Compass | 论文学习路径与价值评分 Skills
 
-在读论文之前，先给你一张"先学什么"的路线图。
+- `/paper-compass-learnpath`：读论文前，先生成先修学习路径
+- `/paper-compass-score`：对论文做价值分析和严格评分，帮你优先筛选值得读的论文
 
-## 示例报告
+## 1. `paper-compass-learnpath`
 
-以下为使用 `/paper-compass` 生成的完整报告示例：
+- 支持 `arXiv ID`、`arXiv URL`、普通论文 URL、本地 PDF
+- 从论文正文里抽取必须先懂的概念，结合 `memory.md` 跳过已掌握内容
+- 为每个概念绑定章节证据和短引文，并按依赖顺序、难度、时间成本生成学习路径
 
-| 论文 | arXiv ID | Venue | 影响力 | 报告链接 |
+现有 learnpath 示例报告：
+
+| 论文 | arXiv ID | Venue | 说明 | 报告 |
 |---|---|---|---|---|
-| ReAct | 2210.03629 | ICLR 2023 | LLM Agent奠基性工作 | [ReAct_agent_report.md](./examples/ReAct_agent_report.md) |
-| Vision Transformer (ViT) | 2010.11929 | ICLR 2021 | 70,000+ 引用 | [ViT_report.md](./examples/ViT_report.md) |
-| Gated Attention | 2505.06708 | NeurIPS 2025 (Best Paper) | 最佳论文奖 | [Gated_Attention_report.md](./examples/Gated_Attention_report.md) |
-| QLoRA | 2305.14314 | NeurIPS 2023 | 10,000+ 引用 | [QLoRA_report.md](./examples/QLoRA_report.md) |
+| ReAct | 2210.03629 | ICLR 2023 | LLM Agent 奠基工作 | [ReAct_agent_report.md](./examples/learnpath/ReAct_agent_report.md) |
+| Vision Transformer (ViT) | 2010.11929 | ICLR 2021 | 70,000+ citations | [ViT_report.md](./examples/learnpath/ViT_report.md) |
+| Gated Attention | 2505.06708 | NeurIPS 2025 | Best Paper | [Gated_Attention_report.md](./examples/learnpath/Gated_Attention_report.md) |
+| QLoRA | 2305.14314 | NeurIPS 2023 | 10,000+ citations | [QLoRA_report.md](./examples/learnpath/QLoRA_report.md) |
 
-## 功能亮点
-
-- 解析论文输入：支持 arXiv ID、arXiv URL、普通 URL、本地 PDF。
-- 证据驱动：每个知识点都要标注"论文哪一章会用到 + 原文短证据"，避免幻觉
-- 学习路径：给出先后顺序、依赖关系、学习难度、预估投入。
-- 个性化裁剪：读取 `memory.md`，跳过你已经掌握的内容。
-- 资源推荐：每个知识点推荐论文链接和视频链接，并支持国内社区（如知乎、CSDN、Bilibill）与国外社区（如 arxiv、Reddit、Hacker News、authorpic）的讨论资源。
-- 报告输出：生成结构化学习清单（Markdown）。
-
-## 安装
+调用方式：
 
 ```bash
-mkdir -p ~/.claude/skills/paper-compass
-git clone https://github.com/cenzihan/paper-compass-skill.git
-cp -r paper-compass-skill/skills/paper-compass ~/.claude/skills/paper-compass
-```
-
-安装后重启 Claude Code，即可用 `/paper-compass` 直接调用。
-
-## 使用方式
-
-```bash
-/paper-compass <paper-input> [memory=<path/to/memory.md>] [lang=zh|en]
+/paper-compass-learnpath <paper-input> [memory=<path/to/memory.md>] [lang=zh|en]
 ```
 
 示例：
 
 ```bash
-/paper-compass 2010.11929
-/paper-compass https://arxiv.org/abs/2010.11929 lang=en
-/paper-compass ./papers/vit.pdf lang=zh
-/paper-compass 2305.14314 memory=~/Documents/know/memory.md lang=en
+/paper-compass-learnpath 2010.11929
+/paper-compass-learnpath ./papers/vit.pdf lang=zh
+/paper-compass-learnpath 2305.14314 memory=~/Documents/know/memory.md lang=en
 ```
 
-语言参数：
+## 2. `paper-compass-score`
 
-- `lang=zh`（默认）
-- `lang=en`
+- 支持 `arXiv ID`、`arXiv URL`、普通论文 URL、本地 PDF
+- 根据期刊/会议质量、作者、引用量、技术增量和业界贡献等多维度为论文综合打分
+- 会真实抓取同领域相关论文做横向对比，包含近年的论文和经典论文，避免凭空判断
 
-## 输入支持
+现有 score 示例报告：
 
-| 输入类型 | 示例 |
-|---|---|
-| arXiv ID | `2010.11929` |
-| 本地 PDF | `./papers/vit.pdf` |
-| 其他论文 URL | `https://...` |
+| 论文 | 年份 | Venue | 说明 | 报告 |
+|---|---:|---|---|---|
+| Update or Wait: How to Keep Your Data Fresh | 2017 | IEEE Transactions on Information Theory | AoI 领域奠基性论文价值分析 | [Update_or_Wait_AoI_score.md](./examples/score/Update_or_Wait_AoI_score.md) |
 
-## 输出内容
+调用方式：
 
-1. 论文快照（标题、任务、关键章节）
-2. 先修知识清单（按顺序）
-3. 每个知识点的证据锚点（章节 + 原文短句）
-4. 难度与学习时长
-5. 资源清单（论文 + 视频）
-6. 基于 `memory.md` 的个性化建议
-
-## `memory.md` 个性化
-
-支持读取你已有知识，例如：
-
-```markdown
-- LoRA: mastered
-- Quantization: familiar
-- Transformer Encoder: familiar
-- Position Embedding: basic
+```bash
+/paper-compass-score <paper-input> [lang=zh|en]
 ```
 
-当分析 QLoRA 论文时，系统会优先保留"4-bit quantization / NF4 / double quantization"等差异点，弱化或跳过你已掌握的 LoRA 基础。
+示例：
+
+```bash
+/paper-compass-score 1706.03762
+/paper-compass-score https://arxiv.org/abs/2210.03629 lang=zh
+/paper-compass-score ./papers/1706.03762.pdf lang=en
+```
+
+## 安装
+
+```bash
+mkdir -p ~/.claude/skills/paper-compass-learnpath
+mkdir -p ~/.claude/skills/paper-compass-score
+git clone https://github.com/cenzihan/paper-compass-skill.git
+cp -r paper-compass-skill/skills/paper-compass-learnpath ~/.claude/skills/paper-compass-learnpath
+cp -r paper-compass-skill/skills/paper-compass-score ~/.claude/skills/paper-compass-score
+```
+
+安装后重启 Claude Code，即可调用这两个 skill。
 
 ## 项目结构
 
@@ -95,19 +83,16 @@ paper-compass/
 ├── CLAUDE.md
 ├── LICENSE
 ├── examples/
-│   ├── ReAct_agent_report.md
-│   ├── ViT_report.md
-│   ├── Gated_Attention_report.md
-│   └── QLoRA_report.md
+│   ├── learnpath/
+│   └── score/
+├── papers/
 └── skills/
-    └── paper-compass/
+    ├── paper-compass-learnpath/
+    │   ├── SKILL.md
+    │   └── references/
+    └── paper-compass-score/
         ├── SKILL.md
         └── references/
-            ├── template.md
-            ├── template.zh.md
-            ├── template.en.md
-            ├── memory-format.md
-            └── resource-sourcing.md
 ```
 
 ## License

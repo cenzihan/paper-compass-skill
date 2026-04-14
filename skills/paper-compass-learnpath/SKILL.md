@@ -1,10 +1,10 @@
 ---
-name: paper-compass
-description: "Paper Compass. Build prerequisite learning paths before reading a paper. Extract concepts, anchor evidence to sections, rank order and difficulty, recommend resources. Use when user gives arXiv ID/link/PDF and asks what to learn first."
+name: paper-compass-learnpath
+description: "Paper Compass Learnpath. Build prerequisite learning paths before reading a paper. Extract concepts, anchor evidence to sections, rank order and difficulty, recommend resources. Use when user gives arXiv ID/link/PDF and asks what to learn first."
 user_invocable: true
 ---
 
-# Paper-Compass
+# Paper-Compass-Learnpath
 
 Do one thing: produce an actionable prerequisite learning path before the user reads a paper.
 
@@ -96,50 +96,71 @@ Do one thing: produce an actionable prerequisite learning path before the user r
 
 **arXiv resources (PDF, HTML, abs) are PRIMARY - always use first:**
 
-1. **arXiv API (abs)**: Fetch `http://export.arxiv.org/api/query?id_list={id}` → get title, authors, abstract, year
-2. **Download PDF**: `curl -L -o papers/{id}.pdf https://arxiv.org/pdf/{id}.pdf` → then use Read tool to parse full content
-3. **Semantic Scholar API (supplement)**: `curl -s "https://api.semanticscholar.org/graph/v1/paper/ARXIV:{id}?fields=venue,citationCount,tldr"` → get venue, citations
+1. **arXiv API (abs)**: Fetch `https://export.arxiv.org/api/query?id_list={id}` → get title, authors, abstract, year
+2. **Stable PDF download with retry**: use `curl` with redirect-following, retry, timeout, and a browser-like user agent
+3. **HTML fallback**: if PDF still fails, fetch `https://arxiv.org/html/{id}` when available
+4. **Semantic Scholar API (supplement)**: `curl -s "https://api.semanticscholar.org/graph/v1/paper/ARXIV:{id}?fields=venue,citationCount,tldr"` → get venue, citations
 
 **Priority Order:**
 ```
 Priority 1: arXiv API → metadata (title, authors, abstract, year)
-Priority 2: Download PDF + Read tool → full paper content (sections, quotes, methods)
-Priority 3: Semantic Scholar API via curl → venue, citations, TLDR (supplement)
+Priority 2: Stable PDF download + Read tool → full paper content (sections, quotes, methods)
+Priority 3: arXiv HTML fallback → recover readable sections when PDF fails
+Priority 4: Semantic Scholar API via curl → venue, citations, TLDR (supplement)
 ```
 
 **CRITICAL**: 
 - **NEVER use WebSearch** - it only works in US and will fail in other regions
-- **NEVER use /semantic-scholar skill** - use Bash + curl directly (skill has rate limit issues)
+- For arXiv full-text access, prefer direct arXiv/API access first; `semantic-scholar` is only a metadata supplement, not the primary full-text path
 - **NEVER use WebFetch for arxiv.org** - domain verification will block it; use curl/download instead
-- arXiv PDF is the BEST source for full paper content - always download and read it
+- arXiv PDF is the BEST source for full paper content, but downloads may intermittently fail; always use retry before giving up
+- Prefer `https://arxiv.org/pdf/{id}` over hardcoding `.pdf` suffix when downloading
+- A successful PDF download must leave a non-empty local file before continuing
+- **NEVER download to `/tmp` or other system temp paths**; always save files under the current working directory in `./papers/`
+- When using Read, always read `./papers/{id}.pdf` or `./papers/{id}.html` from the current workspace so Windows path resolution does not fail
 
 ## Workflow
 
 ### Step 1: Fetch Paper Metadata and Content
 
-**Use Bash + Python/curl for all API calls** (no WebSearch, no WebFetch, no skill invocation):
+**Use Bash + Python/curl for arXiv access and full-text retrieval** (no WebSearch, no WebFetch for arxiv.org):
 
 ```bash
 # 1. Get arXiv metadata
 python3 -c "
 import urllib.request, xml.etree.ElementTree as ET, json
 NS = 'http://www.w3.org/2005/Atom'
-url = 'http://export.arxiv.org/api/query?id_list=ARXIV_ID'
+url = 'https://export.arxiv.org/api/query?id_list=ARXIV_ID'
 with urllib.request.urlopen(url, timeout=30) as r:
     root = ET.fromstring(r.read())
 # Extract title, authors, abstract, year, pdf_url...
 "
 
-# 2. Download PDF
-mkdir -p papers && curl -L -o papers/ARXIV_ID.pdf https://arxiv.org/pdf/ARXIV_ID.pdf
+# 2. Always download to the current workspace under ./papers/
+mkdir -p papers
+curl -L --retry 5 --retry-delay 2 --retry-all-errors \
+  --connect-timeout 15 --max-time 120 \
+  -A "Mozilla/5.0" \
+  -o ./papers/ARXIV_ID.pdf https://arxiv.org/pdf/ARXIV_ID
 
-# 3. Get Semantic Scholar metadata (venue, citations)
+# 3. Verify local PDF exists and is non-trivial
+test -s ./papers/ARXIV_ID.pdf
+
+# 4. If PDF failed, try HTML fallback
+curl -L --retry 3 --retry-delay 2 --retry-all-errors \
+  --connect-timeout 15 --max-time 60 \
+  -A "Mozilla/5.0" \
+  -o ./papers/ARXIV_ID.html https://arxiv.org/html/ARXIV_ID
+
+# 5. Get Semantic Scholar metadata (venue, citations)
 curl -s "https://api.semanticscholar.org/graph/v1/paper/ARXIV:ARXIV_ID?fields=venue,citationCount,publicationVenue,tldr"
 ```
 
-**Then read PDF content**:
+**Then read content**:
 ```bash
-# Use Read tool on papers/ARXIV_ID.pdf to extract sections and quotes
+# Prefer Read tool on ./papers/ARXIV_ID.pdf
+# If the PDF download failed but HTML exists, parse ./papers/ARXIV_ID.html instead
+# Do not read /tmp/... paths on Windows
 ```
 
 Extract and record:
@@ -152,13 +173,16 @@ Extract and record:
 - Impact data (from Semantic Scholar API via curl):
   - Citation count
   - TLDR (one-line summary)
-- Section titles and quotes (from PDF via Read tool)
+- Section titles and quotes (prefer PDF via Read tool, fallback to HTML)
 - Key areas: method, experimental setup, critical appendix details
 
-**When APIs fail**:
-- Mark section-level evidence as `信息不足` if PDF not accessible
+**When download or APIs fail**:
+- If arXiv API fails, stop claiming verified title/year metadata
+- If PDF fails but HTML works, continue with lowered confidence for quote extraction
+- Mark section-level evidence as `信息不足` if neither PDF nor HTML is accessible
 - Mark venue/citations as `待验证` if Semantic Scholar API fails
 - Still produce a valid report with available information
+- If direct Semantic Scholar API lookup is weak or ambiguous, you may use `/semantic-scholar` only as a metadata cross-check for venue, citations, DOI, and TLDR
 
 ### Step 2: Load User Prior Knowledge (`memory.md`)
 
@@ -252,7 +276,7 @@ Select template by language:
 
 Read selected template and write:
 
-- File name: `{timestamp}--paper-compass-{short-title}__learnpath.md`
+- File name: `{timestamp}--paper-compass-learnpath-{short-title}__learnpath.md`
 - Path: current working directory (`./`)
 
 After writing, report the absolute output path to the user.
