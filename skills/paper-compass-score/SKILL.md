@@ -83,6 +83,17 @@ Do one thing: produce a rigorous paper-value analysis report that helps the user
 - For non-arXiv papers or local PDFs, extract title first, then search APIs by title.
 - For published-paper discovery, IEEE/ACM/Springer venue lookup, or ambiguous title search, you MAY use `/semantic-scholar` because it has better built-in filtering for venue papers and citation metadata.
 
+### C4.5: Citation Resolution Across Versions
+
+- Citation retrieval must consider both:
+  - the arXiv preprint record
+  - the later published journal/conference record
+- You MUST try to resolve whether these are the same scholarly work before using citation counts.
+- Never blindly add arXiv citations and published-version citations together, because that may double-count the same citing papers.
+- Prefer citation counts from a canonical merged record when the provider already links arXiv and DOI versions.
+- If providers disagree, write the split explicitly and explain which count is used for scoring.
+- Google Scholar may be used only as a manual cross-check when other sources disagree materially; do not rely on it as the primary automated source.
+
 ### C5: Output Structure Is Fixed
 
 - Read the selected template before writing.
@@ -118,9 +129,11 @@ Required sources:
    - influential citation count
    - TLDR
    - author list
+   - external IDs when available
 3. `OpenAlex API` or another verified scholarly API
    - cited-by trend or backup citation metadata
    - citing paper sample when needed
+   - DOI/arXiv version linkage or location metadata when available
 4. Full paper text
    - downloaded PDF or readable HTML
 
@@ -132,6 +145,7 @@ Recommended source roles:
 - `arXiv PDF/HTML`: authoritative for paper content and quote extraction
 - `/semantic-scholar` or Semantic Scholar API: best for venue discovery, citation counts, DOI, and published-paper retrieval
 - `OpenAlex API`: backup cross-check for citations and related-paper metadata
+- `Google Scholar`: manual-only tie-breaker for citation visibility across versions; not a primary automated source
 
 ## Workflow
 
@@ -147,6 +161,7 @@ Extract and verify:
 - influential citation count if available
 - abstract or TLDR
 - full text sections when accessible
+- version linkage between arXiv and published record when available
 
 For arXiv papers:
 
@@ -154,9 +169,24 @@ For arXiv papers:
 2. Download PDF with retry, timeout, redirect-following, and a browser-like user agent
 3. Verify the local PDF is non-empty before treating the download as successful
 4. If PDF fails, try arXiv HTML as the content fallback
-5. Use Semantic Scholar for venue and citation metadata
-6. Use OpenAlex as a backup or cross-check for citation data
+5. Use Semantic Scholar for venue, DOI, external IDs, and citation metadata
+6. Use OpenAlex as a backup or cross-check for citation data and version linkage
 7. Keep all downloads inside the current workspace under `./papers/`, never `/tmp`
+
+Citation-resolution procedure for arXiv papers:
+
+1. Query Semantic Scholar by `ARXIV:{id}`.
+2. If a DOI or published venue is returned, also query the published record by DOI or exact title.
+3. Query OpenAlex by DOI when available; otherwise query by title and arXiv ID.
+4. Decide whether the arXiv and published entries refer to the same work:
+   - same DOI
+   - explicit arXiv external ID on the published record
+   - matching title/authors/year with clear venue linkage
+5. If they are the same work and one provider already merges them, use that canonical citation count.
+6. If they remain separate and unresolved, report both counts and use a conservative scoring basis:
+   - prefer the published-version count when the paper is clearly published
+   - otherwise use the higher-confidence provider count
+   - never sum the two counts unless you have explicit evidence they are disjoint
 
 Recommended download pattern:
 
@@ -185,6 +215,7 @@ For local PDFs or generic URLs:
 1. Extract title from the file/page
 2. Prefer `/semantic-scholar` or Semantic Scholar search by title when you need better venue-aware retrieval
 3. Verify the best match before continuing
+4. If a DOI or arXiv ID is discovered, repeat the same citation-resolution procedure across preprint and published versions
 
 ### Step 2: Derive the Comparison Theme
 
@@ -264,6 +295,11 @@ Scoring rules:
 - Round only at the end of each dimension, then sum the 7 displayed Section 2 scores to get the final score.
 - After summing, run an explicit arithmetic check before writing Section 1.
 - Section 1, Section 5, and Section 6 must all be consistent with the same final score.
+- For the citation dimensions, state which citation basis was used:
+  - `published-only`
+  - `arxiv-only`
+  - `canonical-merged-record`
+  - `manual-cross-check`
 
 ### Step 5: Write a Strict Comparative Verdict
 
@@ -303,3 +339,4 @@ After writing, report the absolute output path.
 - The final verdict is consistent with the score and evidence.
 - Strong claims about `field-shaping` are conservative and evidence-backed.
 - The final score exactly matches the sum of the 7 dimension scores.
+- Citation-based scoring clearly explains whether the count came from arXiv, the published version, or a canonical merged record.

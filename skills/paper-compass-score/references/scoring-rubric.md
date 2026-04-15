@@ -55,7 +55,22 @@ Evidence should prefer:
 Compute:
 
 - `months_since_release = max(months, 6)`
+- `citation_count = consolidated citation count after version resolution`
 - `citation_velocity = citation_count / months_since_release`
+
+Version-resolution rule:
+
+- For papers that exist as both arXiv preprint and published paper, first determine whether the metadata provider already treats them as one canonical work.
+- If yes, use that canonical citation count.
+- If not, do not blindly add the preprint and published counts together.
+- Prefer the published-version citation count when the paper is clearly published and the linkage is unresolved.
+- If you must choose between conflicting provider counts, prefer the higher-confidence structured source and explain the choice.
+
+Google Scholar rule:
+
+- Google Scholar can be used as a manual cross-check because it often surfaces article versions and citing-article links.
+- Do not use Google Scholar as the primary automated count source in this skill.
+- If Google Scholar materially disagrees with OpenAlex/Semantic Scholar, report the discrepancy in evidence instead of silently replacing the count.
 
 Compare the target paper to the 5-paper peer set plus the target itself.
 
