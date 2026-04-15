@@ -35,6 +35,15 @@ Do one thing: produce a rigorous paper-value analysis report that helps the user
 - Do not invent new dimensions.
 - Do not change weights dynamically.
 
+### C1.5: Arithmetic Consistency Is Mandatory
+
+- The displayed final score MUST equal the arithmetic sum of the 7 dimension scores.
+- There is no hidden bonus, penalty, or manual override after summation.
+- Derive the rating band from the final arithmetic score, not the other way around.
+- Before writing the report, recompute the sum once and verify:
+  - `final_score = publication + author + citation_traction + citation_quality + novelty + industry + field_shaping`
+- If the sum and displayed final score differ even by `0.1`, fix the dimension scores or the final score before writing.
+
 ### C2: Mandatory 5-Paper Comparison Set
 
 - You MUST build a comparison set of exactly 5 arXiv papers found online.
@@ -49,7 +58,9 @@ Do one thing: produce a rigorous paper-value analysis report that helps the user
   - venue if available
   - citation count if available
   - one-sentence reason for inclusion
-- If fewer than 5 qualified arXiv papers can be verified, mark `comparison_status=incomplete`, set confidence to `low`, and cap the final score at `7.4/10.0`.
+- If fewer than 5 qualified arXiv papers can be verified, mark `comparison_status=incomplete` and set confidence to `low`.
+- In the incomplete-comparison case, score uncertain dimensions conservatively so that the arithmetic final score does not exceed `7.4/10.0`.
+- Do NOT apply a hidden post-hoc cap after summing, because that would break score consistency.
 
 ### C3: Conservative Forward-Looking Judgment
 
@@ -249,6 +260,8 @@ Scoring rules:
   - one-sentence rationale
 - Scores must use `0.1` granularity.
 - Round only at the end of each dimension, then sum to the final score.
+- After summing, run an explicit arithmetic check before writing Section 1.
+- Section 1, Section 5, and Section 6 must all be consistent with the same final score.
 
 ### Step 5: Write a Strict Comparative Verdict
 
@@ -287,3 +300,4 @@ After writing, report the absolute output path.
 - The comparison set includes 3 recent papers and 2 classics.
 - The final verdict is consistent with the score and evidence.
 - Strong claims about `field-shaping` are conservative and evidence-backed.
+- The final score exactly matches the sum of the 7 dimension scores.

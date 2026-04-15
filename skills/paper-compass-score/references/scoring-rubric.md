@@ -4,6 +4,12 @@ Total score: `10.0`
 
 All dimension scores must use `0.1` granularity.
 
+Arithmetic rule:
+
+- The final score is the exact sum of the 7 dimension scores.
+- No hidden post-processing is allowed after the sum.
+- If comparison evidence is incomplete, keep the component scores conservative so the final sum remains consistent.
+
 ## Rating Bands
 
 - `9.0-10.0`: exceptional; strong evidence of long-term importance, possibly field-shaping
