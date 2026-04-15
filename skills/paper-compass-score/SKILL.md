@@ -38,11 +38,13 @@ Do one thing: produce a rigorous paper-value analysis report that helps the user
 ### C1.5: Arithmetic Consistency Is Mandatory
 
 - The displayed final score MUST equal the arithmetic sum of the 7 dimension scores.
+- In the report, the Section 1 final score is DEFINED by Section 2: it must be computed from the 7 itemized scores in `## 2. Score Breakdown` / `## 2. 分项评分`.
 - There is no hidden bonus, penalty, or manual override after summation.
 - Derive the rating band from the final arithmetic score, not the other way around.
 - Before writing the report, recompute the sum once and verify:
   - `final_score = publication + author + citation_traction + citation_quality + novelty + industry + field_shaping`
 - If the sum and displayed final score differ even by `0.1`, fix the dimension scores or the final score before writing.
+- Never write Section 1 first and then backfill Section 2. Score Section 2 first, sum it, then write Section 1.
 
 ### C2: Mandatory 5-Paper Comparison Set
 
@@ -259,7 +261,7 @@ Scoring rules:
   - evidence
   - one-sentence rationale
 - Scores must use `0.1` granularity.
-- Round only at the end of each dimension, then sum to the final score.
+- Round only at the end of each dimension, then sum the 7 displayed Section 2 scores to get the final score.
 - After summing, run an explicit arithmetic check before writing Section 1.
 - Section 1, Section 5, and Section 6 must all be consistent with the same final score.
 

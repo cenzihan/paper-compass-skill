@@ -7,6 +7,7 @@ All dimension scores must use `0.1` granularity.
 Arithmetic rule:
 
 - The final score is the exact sum of the 7 dimension scores.
+- In report terms: Section 1 `Final Score` / `总分` is defined by Section 2, not the other way around.
 - No hidden post-processing is allowed after the sum.
 - If comparison evidence is incomplete, keep the component scores conservative so the final sum remains consistent.
 
