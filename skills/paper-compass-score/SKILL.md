@@ -99,6 +99,8 @@ Do one thing: produce a rigorous paper-value analysis report that helps the user
 - Read the selected template before writing.
 - Output must follow the template exactly.
 - Section `7. **Sources**:` must always be present.
+- The report must present itemized scores before the final verdict.
+- In other words: write the score table first, then write the overall conclusion derived from it.
 
 ## Input Normalization
 
@@ -294,7 +296,8 @@ Scoring rules:
 - Scores must use `0.1` granularity.
 - Round only at the end of each dimension, then sum the 7 displayed Section 2 scores to get the final score.
 - After summing, run an explicit arithmetic check before writing Section 1.
-- Section 1, Section 5, and Section 6 must all be consistent with the same final score.
+- After summing, write the final verdict section after the score breakdown section.
+- The final verdict section, the score-reason section, and the reading-priority section must all be consistent with the same final score.
 - For the citation dimensions, state which citation basis was used:
   - `published-only`
   - `arxiv-only`

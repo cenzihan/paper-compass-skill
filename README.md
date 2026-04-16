@@ -44,9 +44,12 @@ Paper Compass | 论文学习路径与价值评分 Skills
 
 现有 score 示例报告：
 
-| 论文 | 年份 | Venue | 说明 | 报告 |
-|---|---:|---|---|---|
-| Update or Wait: How to Keep Your Data Fresh | 2017 | IEEE Transactions on Information Theory | AoI 领域奠基性论文价值分析 | [Update_or_Wait_AoI_score.md](./examples/score/Update_or_Wait_AoI_score.md) |
+| 论文 | 年份 | Venue | 评分 | 说明 | 报告 |
+|---|---:|---|---:|---|---|
+| Update or Wait: How to Keep Your Data Fresh | 2017 | IEEE Transactions on Information Theory | 8.4 | AoI 领域奠基性论文价值分析 | [Update_or_Wait_AoI_score.md](./examples/score/Update_or_Wait_AoI_score.md) |
+| CLIP | 2021 | ICML 2021 | 10.0 | 视觉语言预训练奠基论文价值分析 | [CLIP_score.md](./examples/score/CLIP_score.md) |
+| Segment Anything (SAM) | 2023 | ICCV 2023 | 10.0 | 通用分割基础模型论文价值分析 | [SAM_score.md](./examples/score/SAM_score.md) |
+| DeepSeekMath (GRPO) | 2024 | arXiv | 7.3 | 数学推理与 GRPO 方法论文价值分析 | [DeepSeekMath_GRPO_score.md](./examples/score/DeepSeekMath_GRPO_score.md) |
 
 调用方式：
 

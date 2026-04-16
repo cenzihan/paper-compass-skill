@@ -44,9 +44,12 @@ Examples:
 
 Existing score example reports:
 
-| Paper | Year | Venue | Notes | Report |
-|---|---:|---|---|---|
-| Update or Wait: How to Keep Your Data Fresh | 2017 | IEEE Transactions on Information Theory | AoI foundational-paper value analysis | [Update_or_Wait_AoI_score.md](./examples/score/Update_or_Wait_AoI_score.md) |
+| Paper | Year | Venue | Score | Notes | Report |
+|---|---:|---|---:|---|---|
+| Update or Wait: How to Keep Your Data Fresh | 2017 | IEEE Transactions on Information Theory | 8.5 | AoI foundational-paper value analysis | [Update_or_Wait_AoI_score_en.md](./examples/score/Update_or_Wait_AoI_score_en.md) |
+| CLIP | 2021 | ICML 2021 | 10.0 | Foundational vision-language pretraining paper value analysis | [CLIP_score_en.md](./examples/score/CLIP_score_en.md) |
+| Segment Anything (SAM) | 2023 | ICCV 2023 | 10.0 | Foundation segmentation-model paper value analysis | [SAM_score_en.md](./examples/score/SAM_score_en.md) |
+| DeepSeekMath (GRPO) | 2024 | arXiv | 7.3 | Math-reasoning and GRPO paper value analysis | [DeepSeekMath_GRPO_score_en.md](./examples/score/DeepSeekMath_GRPO_score_en.md) |
 
 Usage:
 

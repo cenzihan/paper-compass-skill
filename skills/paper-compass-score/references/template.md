@@ -10,15 +10,7 @@
 - Comparison Status: {comparison_status}
 - Confidence: {confidence}
 
-## 1. Final Verdict
-
-- Final Score: {final_score}/10.0
-- Rating Band: {rating_band}
-- Reading Priority: {priority}
-- Field-Shaping Assessment: {field_shaping_statement}
-- One-Line Judgment: {one_line_verdict}
-
-## 2. Score Breakdown
+## 1. Score Breakdown
 
 | Dimension | Max | Score | Rationale | Key Evidence |
 |---|---:|---:|---|---|
@@ -29,6 +21,14 @@
 | Technical Novelty / Delta | 2.0 | {score_novelty} | {why_novelty} | {evidence_novelty} |
 | Industry / Open-Source / Product Signal | 1.0 | {score_industry} | {why_industry} | {evidence_industry} |
 | Field-Shaping Potential | 1.0 | {score_field_shaping} | {why_field_shaping} | {evidence_field_shaping} |
+
+## 2. Final Verdict
+
+- Final Score: {final_score}/10.0
+- Rating Band: {rating_band}
+- Reading Priority: {priority}
+- Field-Shaping Assessment: {field_shaping_statement}
+- One-Line Judgment: {one_line_verdict}
 
 ## 3. 5-Paper Comparison Set
 

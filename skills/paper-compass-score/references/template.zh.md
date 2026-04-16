@@ -10,15 +10,7 @@
 - 对比集合状态: {comparison_status}
 - 评分置信度: {confidence}
 
-## 1. 最终结论
-
-- 总分: {final_score}/10.0
-- 等级: {rating_band}
-- 阅读优先级: {priority}
-- 奠基潜力判断: {field_shaping_statement}
-- 一句话判断: {one_line_verdict}
-
-## 2. 分项评分
+## 1. 分项评分
 
 | 维度 | 满分 | 得分 | 评分依据 | 关键证据 |
 |---|---:|---:|---|---|
@@ -29,6 +21,14 @@
 | 技术增量与新颖性 | 2.0 | {score_novelty} | {why_novelty} | {evidence_novelty} |
 | 业界贡献 / 开源 / 产品信号 | 1.0 | {score_industry} | {why_industry} | {evidence_industry} |
 | 奠基潜力 / 方向性影响 | 1.0 | {score_field_shaping} | {why_field_shaping} | {evidence_field_shaping} |
+
+## 2. 最终结论
+
+- 总分: {final_score}/10.0
+- 等级: {rating_band}
+- 阅读优先级: {priority}
+- 奠基潜力判断: {field_shaping_statement}
+- 一句话判断: {one_line_verdict}
 
 ## 3. 相似论文对比集合（5 篇）
 
