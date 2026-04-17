@@ -72,6 +72,18 @@ Examples:
 - Outputs one markdown roadmap covering reading order, dependency graph, per-paper positioning, and 2-3 extra papers worth adding
 - Uses a two-stage workflow by default: lightweight scan first, then deeper reading for only 1-2 pivotal papers if needed
 
+Illustrative roadmap graph:
+
+```mermaid
+graph TD
+  P1[LoRA: low-rank adaptation<br/>2021] --> P2[QLoRA: 4-bit quantization<br/>2023]
+  P1 --> P3[ReLoRA: high-rank training<br/>2023]
+  P3 --> P4[FLORA: random-projection resampling<br/>2024]
+  P1 -.-> P5[GaLore: low-rank gradient projection<br/>2024]
+  P4 --> E1[DoRA: weight decomposition<br/>2024]
+  P3 -.-> E1
+```
+
 Existing roadmap example reports:
 
 | Topic | Folder | Notes | Report |
