@@ -72,6 +72,12 @@ Paper Compass | 论文学习路径、价值评分与阅读路线图 Skills
 - 输出一个 Markdown 报告，包含阅读顺序、链路图、每篇论文的定位理由，以及 2-3 篇必要的外部补充论文
 - 默认采用“两阶段”流程：先做轻量扫描，只在必要时对 1-2 篇关键论文补充更深阅读
 
+现有 roadmap 示例报告：
+
+| 主题 | 文件夹 | 说明 | 报告 |
+|---|---|---|---|
+| LoRA 学习路线图 | `peft_paper` | 从 LoRA 基础到寻找创新点的一条主线 | [LoRA_roadmap.md](./examples/roadmap/LoRA_roadmap.md) |
+
 示意链路图：
 
 ```mermaid
@@ -83,12 +89,6 @@ graph TD
   P4 --> E1[DoRA: 权重分解<br/>2024]
   P3 -.-> E1
 ```
-
-现有 roadmap 示例报告：
-
-| 主题 | 文件夹 | 说明 | 报告 |
-|---|---|---|---|
-| LoRA 学习路线图 | `peft_paper` | 从 LoRA 基础到寻找创新点的一条主线 | [LoRA_roadmap.md](./examples/roadmap/LoRA_roadmap.md) |
 
 调用方式：
 

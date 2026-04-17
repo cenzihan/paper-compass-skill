@@ -72,6 +72,12 @@ Examples:
 - Outputs one markdown roadmap covering reading order, dependency graph, per-paper positioning, and 2-3 extra papers worth adding
 - Uses a two-stage workflow by default: lightweight scan first, then deeper reading for only 1-2 pivotal papers if needed
 
+Existing roadmap example reports:
+
+| Topic | Folder | Notes | Report |
+|---|---|---|---|
+| LoRA learning roadmap | `peft_paper` | A practical path from LoRA basics to idea hunting | [LoRA_roadmap_en.md](./examples/roadmap/LoRA_roadmap_en.md) |
+
 Illustrative roadmap graph:
 
 ```mermaid
@@ -83,12 +89,6 @@ graph TD
   P4 --> E1[DoRA: weight decomposition<br/>2024]
   P3 -.-> E1
 ```
-
-Existing roadmap example reports:
-
-| Topic | Folder | Notes | Report |
-|---|---|---|---|
-| LoRA learning roadmap | `peft_paper` | A practical path from LoRA basics to idea hunting | [LoRA_roadmap_en.md](./examples/roadmap/LoRA_roadmap_en.md) |
 
 Usage:
 
