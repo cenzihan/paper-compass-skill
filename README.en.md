@@ -2,10 +2,11 @@
 
 # paper-compass
 
-Paper Compass | Research-paper learnpath and scoring skills
+Paper Compass | Research-paper learnpath, scoring, and roadmap skills
 
 - `/paper-compass-learnpath`: build a prerequisite learning path before reading a paper
 - `/paper-compass-score`: score a paper's value and help prioritize which papers are worth reading
+- `/paper-compass-roadmap`: take a paper folder and learning goal, then generate a multi-paper reading roadmap
 
 ## 1. `paper-compass-learnpath`
 
@@ -65,14 +66,41 @@ Examples:
 /paper-compass-score ./papers/1706.03762.pdf lang=en
 ```
 
+## 3. `paper-compass-roadmap`
+
+- Supports a paper-folder path, a natural-language learning goal, optional `memory.md`, and `lang=zh|en`
+- Outputs one markdown roadmap covering reading order, dependency graph, per-paper positioning, and 2-3 extra papers worth adding
+- Uses a two-stage workflow by default: lightweight scan first, then deeper reading for only 1-2 pivotal papers if needed
+
+Existing roadmap example reports:
+
+| Topic | Folder | Notes | Report |
+|---|---|---|---|
+| LoRA learning roadmap | `peft_paper` | A practical path from LoRA basics to idea hunting | [LoRA_roadmap_en.md](./examples/roadmap/LoRA_roadmap_en.md) |
+
+Usage:
+
+```bash
+/paper-compass-roadmap <folder-path> goal="natural-language learning goal" [memory=<path/to/memory.md>] [lang=zh|en]
+```
+
+Examples:
+
+```bash
+/paper-compass-roadmap ./papers/moe goal="I want to understand MoE routing, efficient training, and serving tradeoffs" lang=zh
+/paper-compass-roadmap ./reading_set goal="Build a solid path into RLHF and GRPO" memory=~/Documents/know/memory.md lang=en
+```
+
 ## Install
 
 ```bash
 mkdir -p ~/.claude/skills/paper-compass-learnpath
 mkdir -p ~/.claude/skills/paper-compass-score
+mkdir -p ~/.claude/skills/paper-compass-roadmap
 git clone https://github.com/cenzihan/paper-compass-skill.git
 cp -r paper-compass-skill/skills/paper-compass-learnpath ~/.claude/skills/paper-compass-learnpath
 cp -r paper-compass-skill/skills/paper-compass-score ~/.claude/skills/paper-compass-score
+cp -r paper-compass-skill/skills/paper-compass-roadmap ~/.claude/skills/paper-compass-roadmap
 ```
 
 Restart Claude Code after installation.
@@ -87,13 +115,17 @@ paper-compass/
 ├── LICENSE
 ├── examples/
 │   ├── learnpath/
-│   └── score/
+│   ├── score/
+│   └── roadmap/
 ├── papers/
 └── skills/
     ├── paper-compass-learnpath/
     │   ├── SKILL.md
     │   └── references/
-    └── paper-compass-score/
+    ├── paper-compass-score/
+    │   ├── SKILL.md
+    │   └── references/
+    └── paper-compass-roadmap/
         ├── SKILL.md
         └── references/
 ```
